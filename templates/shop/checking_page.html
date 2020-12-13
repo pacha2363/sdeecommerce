@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+</header>
+<hr class="offset-lg">
+<hr class="offset-lg">
+    <div class="bars">
+        <div class="container">
+            <div class="row">
+                <div class="white">
+                    <div class="container checkout">
+                        <h1>Checking ... </h1>
+                        <hr class="offset-sm">
+                    </div>
+                </div>
+                <div class="container checkout">
+                    <h1> {{ messageTrue }}</h1>
+                    <a href="{% url 'shop' %}">Go to the shop</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  <hr class="offset-lg">
+  <hr class="offset-md">
+
+{% endblock %}

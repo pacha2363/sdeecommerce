@@ -1,0 +1,152 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+</header>
+<hr class="offset-lg">
+<hr class="offset-lg">
+    <div class="bars">
+        <div class="container">
+            <div class="row">
+
+                <div class="white">
+                    <div class="container checkout">
+                        <h1>Checkout order</h1>
+                        <hr class="offset-sm">
+                    </div>
+                </div>
+            
+                <div class="container checkout">
+                    <form action="" method="post">
+                    <div class="row">
+                        <div class="col-md-7">
+                          <form method="POST" class="post-form">{% csrf_token %}
+                            <div class="row group">
+                              <div class="col-sm-4"><h2 class="h4">Cashier</h2></div>
+                              <div class="col-sm-8">{{ form.user }}</div>
+                            </div>      
+                            <div class="row group">
+                              <div class="col-sm-4"><h2 class="h4">Account Number</h2></div>
+                              <div class="col-sm-8">{{ form.accountnumber }}</div>
+                            </div>
+                            <div class="row group">
+                              <div class="col-sm-4"><h2 class="h4">Order Reference</h2></div>
+                              <div class="col-sm-8">{{ form.ref_code }}</div>
+                            </div>  
+                            <div class="row group">
+                              <div class="col-sm-4"><h2 class="h4">Order Amount</h2></div>
+                              <div class="col-sm-8">{{ form.amoutoftransaction }}</div>
+                            </div>                              
+                            <div class="row group">
+                                <div class="col-sm-4"><h2 class="h4">Receiver / Customer </h2></div>
+                                <div class="col-sm-8"> {{ form.receiver }}</div>
+                            </div>
+                              <div class="row group">
+                                <div class="col-sm-4"><h2 class="h4">Payment Method</h2></div>
+                                <div class="col-sm-8"> {{ form.paymentmethod }}</div>
+                              </div>
+                              <div class="row group">
+                                <div class="col-sm-4"><h2 class="h4">Phone</h2></div>
+                                <div class="col-sm-8"> {{ form.phone }} </div>
+                              </div>
+                              <div class="row group">
+                                <div class="col-sm-4"><h2 class="h4">E-mail</h2></div>
+                                <div class="col-sm-8">{{ form.email }} </div>
+                              </div>
+                              <div class="row group">
+                                <div class="col-sm-4"><h2 class="h4">Date de Transaction</h2></div>
+                                <div class="col-sm-8">{{ form.date_transaction }} </div>
+                              </div>
+                              <button type="submit" class="btn btn-primary pull-right">Save</button>
+                          </form>
+                              <div class="row group">
+                                <img class="media-object" src="{{ existing_order_order.qr_code.url }}" alt="{{ existing_order_order.ref_code }}"/>
+                                <div class="col-xs-6 col-md-4">
+                                  <a href="{% url 'checking' existing_order_order.ref_code %}" class="btn btn-primary pull-right">Check the payment {{ existing_order_order.ref_code }}</a>
+                                </div>
+                              </div>
+
+                              <hr class="offset-lg visible-xs visible-sm">
+                              <hr class="offset-lg visible-xs">
+                        </div>
+            
+                        <div class="col-md-5 white">
+                            <hr class="offset-md visible-xs visible-sm">
+                            <div class="checkout-cart">
+                                <div class="content">
+
+                                  <h3 class="media-heading">Order Summary</h3>
+                                    {% if existing_order %}
+                                    {% for product_order in existing_order %}
+                                    <div class="media">
+                                      <div class="media-left">
+                                        <a href="#">
+                                          <img class="media-object" src="{{ product_order.product.image.url }}" alt="{{ product_order.product.name }}"/>
+                                        </a>
+                                      </div>
+                                      <div class="media-body">
+                                        <h4 class="media-heading">{{ product_order.product.name }}</h4>
+                                        <label>{{ product_order.product.category }}</label>
+                                        <p class="price">{{ product_order.product.price }}.00 円</p>
+                                      </div>
+                                      <div class="controls">
+                                        <div class="input-group">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-sm" type="button" data-action="minus"><i class="ion-minus-round"></i></button>
+                                          </span>
+                                          <input type="text" class="form-control input-sm" placeholder="Qty" value="1" readonly="">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default btn-sm" type="button" data-action="plus"><i class="ion-plus-round"></i></button>
+                                          </span>
+                                        </div><!-- /input-group -->
+                          
+                                        <a href="{% url 'delete-from-cart' product_order.id %}"> <i class="ion-trash-b"></i> Remove </a>
+                                      </div>
+                                    </div>
+                                      {% endfor %}
+                                      {% else %}
+                                        <p>There is no order Here!</p>
+                                        <h5>or</h5>
+                                        <p>You're not Sign-In !</p>
+                                      {% endif %}
+                                  </div>
+
+                                </div>
+                            </div>
+                            <hr class="offset-md visible-xs visible-sm">
+                        </div>
+            
+                        <hr class="offset-lg hidden-xs">
+            
+                        <div class="col-sm-12 white">
+                            <hr class="offset-md">
+                            <div class="row">
+                                <div class="col-xs-6 col-md-4">
+                                    {% if existing_order_order.get_cart_total != None %}
+                                    <h3 class="h5 no-margin">Sub total: {{ existing_order_order.get_cart_total }}.00 円</h3>
+                                    <h3 class="h3 no-margin">Total: {{ existing_order_order.get_cart_total }}.00 円</h3>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 hidden-xs">
+                                </div><!--
+                                <div class="col-xs-6 col-md-4">
+                                    <a href="" class="btn btn-primary pull-right" type="submit">Confirm order</a>
+                                </div>-->
+                            </div>
+                            <hr class="offset-md">
+                        </div>
+            
+                    </div>
+                    </form>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+  <hr class="offset-lg">
+  <hr class="offset-md">
+
+{% endblock %}

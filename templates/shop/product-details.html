@@ -1,0 +1,120 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+</header>
+<hr class="offset-lg">
+<hr class="offset-lg">
+    <div class="bars">
+        <div class="container">
+            <div class="row">
+                    <br><br>
+                    <h2 class="modal-title text-center">{{ product.name }}</h2>
+                    <br>
+
+                    <section class="product">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-sm-7 col-md-7 white no-padding">
+                                <div class="itemImage">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-5 no-padding-xs">
+                              <div class="caption">
+                  
+                                <h2 class="h1">{{ product.name }}</h2>
+                                <p> {{ product.details }} </p>
+                                <p class="price">{{ product.price }}.00 円</p> 
+                                <p>{{ product.category }}</p>
+                                <hr class="offset-xs visible-sm">
+                  
+                                <hr class="offset-md">
+                  
+                                <a href="{% url 'add-to-cart' product.id %}" class="btn btn-primary btn-sm rounded"> <i class="ion-bag"></i> Add to cart</a>
+                                <button class="btn btn-link"> <i class="ion-ios-heart"></i> See later </button>
+                              </div>
+                              <div class="talk white">
+                                <h2 class="h3">Do you have any questions?</h2>
+                                <p class="">Whatsuping now with our seller</p>
+                                <a href="tel:+818010009000" class="btn btn-primary btn-sm"> <i class="ion-social-whatsapp"></i> +81 80 1000 9000 </a>
+                                <hr class="offset-md visible-xs">
+                              </div>
+
+                            </div>
+                          </div>
+                          <hr class="offset-sm hidden-xs">
+                  
+                          <div class="row">
+                            <div class="col-sm-7 white sm-padding">
+                              <hr class="offset-sm visible-xs"> <br><br>                  
+                                <p> {{ product.details }} </p>
+                                <p> {{ product.details }} </p>
+                              <br>
+                                <hr class="offset-lg">
+                            </div>
+                            <div class="col-sm-5 no-padding-xs">                
+                              <div class="comments white">
+                                <h2 class="h3">What do you think? (#3)</h2>
+
+                                <div class="wrapper">
+                                  <div class="content">
+                                    <h3>Chere</h3>
+                                    <label>1 day ago</label>
+                                    <p>
+                                      Apple Music brings iTunes music streaming to the UK. But is it worth paying for? In our Apple Music review, we examine the service's features, UK pricing, audio quality and music library
+                                    </p>
+                
+                                  </div>
+                                </div>
+                                <hr class="offset-lg">
+                                <hr class="offset-md">
+                  
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal-Comment"> <i class="ion-chatbox-working"></i> Add comment </button>
+                                <hr class="offset-md visible-xs">
+                              </div>            
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                      <hr class="offset-lg">
+                  
+                    <section class="products">
+                        <div class="container">
+                          <h2 class="upp align-center-xs"> Related products : {{ product.category }} </h2>
+                          <hr class="offset-lg">
+                  
+                          <div class="row">
+                            {% if related_products %}
+                            {% for rel_product in related_products %}
+                            <div class="col-sm-4 col-md-3 product">
+                              <div class="body">
+                                <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+                                <a href="{% url 'product-details' rel_product.id %}"><img src="{{ rel_product.image.url }}" alt="{{ rel_product.name }}"/></a>
+                  
+                                <div class="content align-center">
+                                  <p class="price">{{ rel_product.price }}.00 円</p>
+                                  <h2 class="h3">{{ rel_product.name }}</h2>
+                                  <hr class="offset-sm">
+                  
+                                  <button class="btn btn-link"> <i class="ion-android-open"></i> <a href="{% url 'product-details' rel_product.id %}">Details</a></button>
+                                  <a href="{% url 'add-to-cart' product.id %}" class="btn btn-primary btn-sm rounded"> <i class="ion-bag"></i> Add to cart</a>
+                                </div>
+                              </div>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                              <p>There is No Related Product!</p>
+                            {% endif %}                
+                          </div>
+                  
+                        </div>
+                    </section>
+
+            </div>
+        </div>
+    </div>
+  <hr class="offset-lg">
+  <hr class="offset-md">
+
+{% endblock %}

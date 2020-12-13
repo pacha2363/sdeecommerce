@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+</header>
+<hr class="offset-lg">
+<hr class="offset-lg">
+    <div class="bars">
+        <div class="container">
+            <div class="row">
+                <br><br>
+                <h2 class="modal-title text-center">My Profile</h2>
+                <br>
+                <div class="myprofile">
+                    <h3>My Profile</h3>
+
+                    <form method="POST" action="" class="" >
+                        {% csrf_token %}
+                        <p>Username</p>
+                        {{ form.username }}
+                        <p>Email</p>
+                        {{ form.email }}
+                        <br>
+                        <button type="submit">Update</button>
+                    </form>
+
+                </div>
+                <div class="hereur">
+                    <h3>My HereUr</h3>
+                    <div class="content">
+
+                        {% if hereurlist %}
+                        {% for hereur in hereurlist %}
+                        <div class="media">
+                          <div class="media-left">
+                            <a href="#">
+                              <img class="media-object" src="{{ hereur.qr_code.url }}" alt="{{ hereur.accountnumber }}"/>
+                              <a href="{{ hereur.qr_code.url }}" target="Blank"> <i class="ion-android-open"></i> Display QR Code </a> <br>
+                            </a>
+                          </div>
+                          <div class="media-body">
+                            <h4 class="media-heading">{{ hereur.accountnumber }}</h4>
+                            <label>{{ hereur.accountType }} Account</label>
+                            <p class="price">Amount : {{ hereur.amount }}.00 円</p>
+                            <label>Active status : {{ hereur.is_active }} </label>
+                          </div>
+                        </div>
+                          {% endfor %}
+                          {% else %}
+                            <p>There is no hereur account Here!</p>
+                            <h5>or</h5>
+                            <p>You're not Sign-In !</p>
+                          {% endif %}
+                          <h4><a href="{% url 'createaccount' %}"> Create a new account HereUr </a></h4>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <hr class="offset-lg">
+  <hr class="offset-md">
+
+{% endblock %}

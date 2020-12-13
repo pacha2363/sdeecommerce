@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+</header>
+<hr class="offset-lg">
+<hr class="offset-lg">
+    <div class="bars">
+        <div class="container">
+            <div class="row">
+                    <br><br>
+                    <h2 class="modal-title text-center">Shop</h2>
+                    <br>
+                    <section class="products">
+                        <div class="container">                 
+                          <div class="row">
+                            {% if products %}
+                            {% for product in products %}
+                            <div class="col-sm-6 col-md-4 product">
+                                <div class="body">
+                                  <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+                                  <a href="{% url 'product-details' product.id %}"><img src="{{ product.image.url }}" alt="{{ product.name }}"/></a>
+                    
+                                  <div class="content align-center">
+                                    <p class="price">{{ product.price }}.00 円</p>
+                                    <h2 class="h3"><a href="{% url 'product-details' product.id %}">{{ product.name }} in {{ product.category }} </a></h2>
+                                    <hr class="offset-sm">
+                    
+                                    <button class="btn btn-link"> <i class="ion-android-open"></i> <a href="{% url 'product-details' product.id %}">Details</a></button>
+                                    <a href="{% url 'add-to-cart' product.id %}" class="btn btn-primary btn-sm rounded"> <i class="ion-bag"></i> Add to cart</a>
+                                  </div>
+                                </div>
+                              </div>
+                 
+                              {% endfor %}
+                              {% else %}
+                                <p>There is No Product Here!</p>
+                              {% endif %}
+                          </div>
+                        </div>
+                      </section>
+
+            </div>
+        </div>
+    </div>
+  <hr class="offset-lg">
+  <hr class="offset-md">
+
+{% endblock %}

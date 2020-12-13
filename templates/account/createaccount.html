@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+</header>
+<hr class="offset-lg">
+<hr class="offset-lg">
+    <div class="bars">
+        <div class="container">
+            <div class="row">
+                    <br><br>
+                    <h2 class="modal-title text-center">Create a new HereUr account</h2>
+                    <br>
+
+                    <form method="POST" action="" class="" > {% csrf_token %}
+                        <p>Type Account :</p>
+                        {{ form.accountType }}
+                        <p>Solde :</p>
+                        {{ form.amount }}
+                        <p>Remark :</p>
+                        {{ form.details }}
+                        
+                        <button class="btn btn-primary" type="submit">Create</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+  <hr class="offset-lg">
+  <hr class="offset-md">
+
+{% endblock %}

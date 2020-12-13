@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+</header>
+<hr class="offset-lg">
+<hr class="offset-lg">
+    <div class="bars">
+        <div class="container">
+            <div class="row">
+                    <br><br>
+                    <h2 class="modal-title text-center">HereUr</h2>
+                    <br>
+                    
+                    {% if hereurlist %}
+                    {% for hereur in hereurlist %}
+                    <div class="col-sm-6 col-md-4 product">
+                        <div class="body">
+            
+                          <div class="content align-center">
+                            <p class="price">{{ hereur.accountnumber }}</p>
+                            <h2 class="h3"><a href="{% url 'product-details' hereur.id %}">{{ hereur.amount }} Type {{ hereur.accountType }} </a></h2>
+                            <hr class="offset-sm">
+            
+                            <button class="btn btn-link"> <i class="ion-android-open"></i> <a href="{% url 'product-details' hereur.id %}">Details</a></button>
+                            <a href="{% url 'add-to-cart' hereur.id %}" class="btn btn-primary btn-sm rounded"> <i class="ion-bag"></i> Add to cart</a>
+                          </div>
+                        </div>
+                      </div>
+         
+                      {% endfor %}
+                      {% else %}
+                        <p>There is no account Here!</p>
+                      {% endif %}
+
+            </div>
+        </div>
+    </div>
+  <hr class="offset-lg">
+  <hr class="offset-md">
+
+{% endblock %}

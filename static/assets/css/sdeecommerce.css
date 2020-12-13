@@ -1,0 +1,23 @@
+.myprofile{
+    width: 59%;
+    float: left;
+    height: auto;
+    background-color: white;
+    margin-right: 5px;
+    padding: 15px;
+}
+.hereur{
+    width: 39%;
+    float: left;
+    height: auto;
+    background-color: whitesmoke;
+    padding: 15px;
+}
+.itemImage{
+    width: 100%;
+    float: left;
+}
+.itemImage img{
+    width: 100%;
+    float: left;
+}

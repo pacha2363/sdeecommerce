@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+</header>
+<hr class="offset-lg">
+<hr class="offset-lg">
+    <div class="bars">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <br><br>
+                    <h2 class="modal-title text-center">Registration</h2>
+                    <br>
+      
+                    <form method="POST" class="join" action="">{% csrf_token %}
+                      <h5>Username </h5>
+                      {{form.username}}
+                      <br>
+                      <h5>Email </h5>
+                      {{form.email}}
+                      <br>
+                      <h5>Your Password </h5>
+                      {{form.password1}}
+                      <br>
+                      <h5>Retape your password</h5>
+                      {{form.password2}}
+                      <br><br>
+      
+                      <button type="submit" class="btn btn-primary btn-sm">Create my account</button> &nbsp;&nbsp;
+                      <a href="#">Terms ></a>
+                      <br><br>
+                      <p>
+                        By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.
+                      </p>
+                    </form>
+                    <script>
+                      $( function() {
+                      $( "#dialog" ).dialog();
+                   } );
+                  </script>
+                      <div id="dialog" title="Basic dialog"><p>{{form.errors}}</p></div>
+                  </div>
+                </div>
+
+
+                <div class="modal fade" id="Modal-Registration1" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ion-android-close"></i></span></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container-fluid">
+                            <div class="row">
+
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+            </div>
+        </div>
+    </div>
+  <hr class="offset-lg">
+  <hr class="offset-md">
+
+{% endblock %}
+
+
+
+
+
+
+
+
+  
